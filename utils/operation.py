@@ -5,6 +5,7 @@ class Operation:
     """
     Класс для обработки данных по операциям
     """
+
     def __init__(self,
                  tn: int,
                  date: str,
@@ -48,3 +49,8 @@ class Operation:
         :return: дата в формате исо
         """
         return datetime.fromisoformat(date)
+
+    def __str__(self):
+        return (f"{datetime.strftime(self.date, '%d%m%Y')} Перевод организации\n"
+                f"{self.from_} -> {self.to}\n"
+                f"{self.operation_amount['amount']} {self.operation_amount['currency']['name']}.")
