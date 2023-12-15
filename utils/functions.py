@@ -33,3 +33,12 @@ def get_individual_transactions(transactions: list[dict]) -> list[Operation]:
             )
         correct_transactions.append(existing_transaction)
     return correct_transactions
+
+
+def sorts_transactions_by_date(transactions: list[Operation]) -> list[Operation]:
+    """
+    Функция сортирует операции по дате
+    :param transactions: данные по операциям
+    :return: отсортированные по дате данные по операциям
+    """
+    return sorted(transactions, key=lambda transaction: transaction.date, reverse=True)
