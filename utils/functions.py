@@ -13,7 +13,7 @@ def get_all_transaction_data(path) -> list[dict]:
         return json.load(file)
 
 
-def get_individual_transactions(transactions: list[dict]) -> list[dict]:
+def get_individual_transactions(transactions: list[dict]) -> list[Operation]:
     """
     Функция приводит данные по операциям к нужному виду
     :param transactions: все данные по операциям
@@ -21,14 +21,15 @@ def get_individual_transactions(transactions: list[dict]) -> list[dict]:
     """
     correct_transactions = []
     for transaction in transactions:
-        existing_transaction = Operation(
-            tn=transaction["id"],
-            date=transaction["date"],
-            state=transaction["state"],
-            operation_amount=transaction["operationAmount"],
-            description=transaction["description"],
-            from_=transaction["from"],
-            to=transaction["to"]
-        )
+        if transaction:
+            existing_transaction = Operation(
+                tn=transaction["id"],
+                date=transaction["date"],
+                state=transaction["state"],
+                operation_amount=transaction["operationAmount"],
+                description=transaction["description"],
+                from_=transaction.get("from", ""),
+                to=transaction["to"]
+            )
         correct_transactions.append(existing_transaction)
     return correct_transactions
