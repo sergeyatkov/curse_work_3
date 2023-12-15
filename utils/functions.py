@@ -21,7 +21,7 @@ def get_individual_transactions(transactions: list[dict]) -> list[Operation]:
     """
     correct_transactions = []
     for transaction in transactions:
-        if transaction:
+        if transaction and transaction["state"] == "EXECUTED":
             existing_transaction = Operation(
                 tn=transaction["id"],
                 date=transaction["date"],
