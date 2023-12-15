@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class Operation:
     """
     Класс для обработки данных по операциям
@@ -12,16 +15,16 @@ class Operation:
                  to: str
                  ):
         self.tn = tn
-        self.date = date
+        self.date = self.formats_the_date(date)
         self.state = state
         self.operation_amount = operation_amount
         self.description = description
-        self.from_ = from_
-        self.to = to
+        self.from_ = self.encrypts_details(from_)
+        self.to = self.encrypts_details(to)
 
     def encrypts_details(self, details: str) -> str:
         """
-        Функция приводит номера реквизитов для переводов
+        Метод класса приводит номера реквизитов для переводов
         в заданный зашифрованный формат
         :param details: строка с данными счета
         :return: зашифрованный номер счета
@@ -37,3 +40,11 @@ class Operation:
             return f"{prop_number_str[0: 4]} {prop_number_str[4: 6]}** **** {prop_number_str[12:]}"
         else:
             return prop_number_str
+
+    def formats_the_date(self, date: str) -> datetime:
+        """
+        Метод класса переводит дату в нужный формат
+        :param date: дата из файла в виде строки
+        :return: дата в формате исо
+        """
+        return datetime.fromisoformat(date)
