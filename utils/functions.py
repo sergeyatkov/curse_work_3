@@ -21,14 +21,14 @@ def get_individual_transactions(transactions: list[dict]) -> list[dict]:
     """
     correct_transactions = []
     for transaction in transactions:
-            existing_transaction = Operation(
-                tn=transaction["id"],
-                date=transaction["date"],
-                state=transaction["state"],
-                operation_amount=transaction["operationAmount"],
-                description=transaction["description"],
-                from_=transaction["from"],
-                to=transaction["to"]
-            )
+        existing_transaction = Operation(
+            tn=transaction["id"],
+            date=transaction["date"],
+            state=transaction["state"],
+            operation_amount=transaction["operationAmount"],
+            description=transaction["description"],
+            from_=transaction["from"],
+            to=transaction["to"]
+        )
         correct_transactions.append(existing_transaction)
     return correct_transactions
