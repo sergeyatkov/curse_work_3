@@ -31,7 +31,7 @@ class Operation:
         :return: зашифрованный номер счета
         """
         if details.startswith("Счет"):
-            return f"{details[:5]}****************{details[-1:-5:-1]}"
+            return f"{details[:5]}**{details[-4:]}"
         elif details == "":
             return details
         else:
@@ -40,9 +40,11 @@ class Operation:
             for symbol in details:
                 if symbol.isalpha():
                     payment_system = payment_system + symbol
+                elif symbol == " ":
+                    payment_system = payment_system + symbol
                 else:
                     card_number = card_number + symbol
-            return f"{payment_system}{card_number[:5]} {card_number[5:7]}** **** {card_number[-1:-5:-1]}"
+            return f"{payment_system}{card_number[:4]} {card_number[4:6]}** **** {card_number[-4:]}"
 
     def formats_the_date(self, date: str) -> datetime:
         """
