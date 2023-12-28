@@ -30,17 +30,19 @@ class Operation:
         :param details: строка с данными счета
         :return: зашифрованный номер счета
         """
-        prop_number_list = []
-        for symbol in details:
-            if symbol.isdigit():
-                prop_number_list.append(symbol)
-        prop_number_str = "".join(prop_number_list)
-        if len(prop_number_str) > 16:
-            return f"****************{prop_number_str[16:]}"
-        elif len(prop_number_str) == 16:
-            return f"{prop_number_str[0: 4]} {prop_number_str[4: 6]}** **** {prop_number_str[12:]}"
+        if details.startswith("Счет"):
+            return f"{details[:5]}****************{details[-1:-5:-1]}"
+        elif details == "":
+            return details
         else:
-            return prop_number_str
+            card_number = ""
+            payment_system = ""
+            for symbol in details:
+                if symbol.isalpha():
+                    payment_system = payment_system + symbol
+                else:
+                    card_number = card_number + symbol
+            return f"{payment_system}{card_number[:5]} {card_number[5:7]}** **** {card_number[-1:-5:-1]}"
 
     def formats_the_date(self, date: str) -> datetime:
         """
@@ -51,6 +53,6 @@ class Operation:
         return datetime.fromisoformat(date)
 
     def __str__(self):
-        return (f"{datetime.strftime(self.date, '%d%m%Y')} Перевод организации\n"
+        return (f"{datetime.strftime(self.date, '%d.%m.%Y')} {self.description}\n"
                 f"{self.from_} -> {self.to}\n"
                 f"{self.operation_amount['amount']} {self.operation_amount['currency']['name']}.")
