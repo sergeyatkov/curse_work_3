@@ -31,7 +31,7 @@ def get_individual_transactions(transactions: list[dict]) -> list[Operation]:
                 from_=transaction.get("from", ""),
                 to=transaction["to"]
             )
-        correct_transactions.append(existing_transaction)
+            correct_transactions.append(existing_transaction)
     return correct_transactions
 
 
