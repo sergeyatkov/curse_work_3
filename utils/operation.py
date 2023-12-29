@@ -59,4 +59,4 @@ class Operation:
     def __str__(self):
         return (f"{datetime.strftime(self.date, '%d.%m.%Y')} {self.description}\n"
                 f"{self.from_} -> {self.to}\n"
-                f"{self.operation_amount['amount']} {self.operation_amount['currency']['name']}.")
+                f"{self.operation_amount['amount']} {self.operation_amount['currency']['name']}")
