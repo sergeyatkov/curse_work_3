@@ -23,7 +23,8 @@ class Operation:
         self.from_ = self.encrypts_details(from_)
         self.to = self.encrypts_details(to)
 
-    def encrypts_details(self, details: str) -> str:
+    @staticmethod
+    def encrypts_details(details: str) -> str:
         """
         Метод класса приводит номера реквизитов для переводов
         в заданный зашифрованный формат
@@ -46,7 +47,8 @@ class Operation:
                     card_number = card_number + symbol
             return f"{payment_system}{card_number[:4]} {card_number[4:6]}** **** {card_number[-4:]}"
 
-    def formats_the_date(self, date: str) -> datetime:
+    @staticmethod
+    def formats_the_date(date: str) -> datetime:
         """
         Метод класса переводит дату в нужный формат
         :param date: дата из файла в виде строки
